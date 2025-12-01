@@ -112,7 +112,7 @@
   left: 0;
   bottom: 0;
   width: 120px;
-  height: 4px;
+  height: 2px;
   background: linear-gradient(
     90deg,
     var(--dnd-red),
@@ -665,7 +665,7 @@ h4.toc-header {
   left: 0;
   bottom: 0;
   width: 120px;
-  height: 4px;
+  height: 2px;
   background: linear-gradient(
     90deg,
     var(--dnd-red),
