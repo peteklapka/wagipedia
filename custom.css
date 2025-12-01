@@ -547,7 +547,7 @@ figure.image.image_resized.image-style-align-left {
 }
 figure.image.image_resized.image-style-align-right {
   float: right;
-  mmargin: .25rem 1.5rem 1rem 0
+  margin: .25rem 1.5rem 1rem 0
 }
 h1.toc-header,
 h2.toc-header,
