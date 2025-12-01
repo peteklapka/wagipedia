@@ -543,11 +543,11 @@
 }
 figure.image.image_resized.image-style-align-left {
   float: left;
-  margin: 0 1.5rem 1rem 0
+  margin: 0 0rem 0rem 0
 }
 figure.image.image_resized.image-style-align-right {
   float: right;
-  margin: 0 0 1rem 1.5rem
+  margin: 0 0 0rem 0rem
 }
 h1.toc-header,
 h2.toc-header,
