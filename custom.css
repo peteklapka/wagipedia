@@ -87,6 +87,9 @@
   text-transform: uppercase;
   position: relative;
   padding-bottom: .3rem
+  display: inline-block;
+  max-width: 100%;
+  clear: both; 
 }
 .contents h1::after {
   content: "";
@@ -603,6 +606,7 @@ figure.image.image_resized.image-style-align-right + h1::after {
 .contents h1 {
   display: inline-block;
   max-width: 100%
+  clear: both; 
 }
 
 /* Let h2/h3 behave like normal block headings */
@@ -615,6 +619,7 @@ figure.image.image_resized.image-style-align-right + h1::after {
 .contents.ck.ck-content h1 {
   display: inline-block;
   max-width: 100%;
+  clear: both; 
 }
 
 .contents.ck.ck-content h2,
