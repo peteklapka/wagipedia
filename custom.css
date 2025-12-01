@@ -106,14 +106,19 @@
   text-decoration: none!important
 }
 
-.contents h2::after {
+.v-main .contents h2::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))!important
+  background: linear-gradient(
+    90deg,
+    var(--dnd-red),
+    var(--dnd-gold),
+    rgba(0,0,0,0)
+  ) !important;
 }
 
 .contents h3 {
@@ -488,7 +493,9 @@
   font-size: 1.6rem;
   margin-top: .6rem;
   margin-bottom: .15rem;
-  padding-bottom: .12rem
+  padding-bottom: .3rem;
+  position: relative;
+  border-bottom: none !important; 
 }
 .v-main .contents h2 > a {
   position: relative;
@@ -645,4 +652,24 @@ h2.toc-header,
 h3.toc-header,
 h4.toc-header {
   clear: none
+}
+
+.contents.ck.ck-content h2 {
+  position: relative;
+  border-bottom: none !important;
+}
+
+.contents.ck.ck-content h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--dnd-red),
+    var(--dnd-gold),
+    rgba(0,0,0,0)
+  ) !important;
 }
