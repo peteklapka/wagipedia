@@ -600,20 +600,30 @@ figure.image.image_resized.image-style-align-right + h1.toc-header::after,
 figure.image.image_resized.image-style-align-right + h1::after {
   display: none
 }
-.contents h1,
-.contents h2,
-.contents h3 {
+.contents h1 {
   display: inline-block;
   max-width: 100%
 }
-.contents.ck.ck-content h1,
+
+/* Let h2/h3 behave like normal block headings */
+.contents h2,
+.contents h3 {
+  display: block;
+  max-width: 100%;
+}
+
+.contents.ck.ck-content h1 {
+  display: inline-block;
+  max-width: 100%;
+}
+
 .contents.ck.ck-content h2,
 .contents.ck.ck-content h3,
 .contents.ck.ck-content h4 {
-  display: inline-block;
+  display: block;
   max-width: 100%;
-  clear: none
 }
+
 h1.toc-header,
 h2.toc-header,
 h3.toc-header,
