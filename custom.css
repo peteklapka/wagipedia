@@ -119,7 +119,7 @@
   padding-right: 0!important;
   padding-bottom: 0!important;
   padding-left: 0!important;
-  margin-top: .0rem!important;
+  margin-top: .25rem!important;
   margin-bottom: .65rem!important
 }
 .contents a {
@@ -543,11 +543,11 @@
 }
 figure.image.image_resized.image-style-align-left {
   float: left;
-  margin: 0 0rem 0rem 0
+  margin: .25rem 1.5rem 1rem 0
 }
 figure.image.image_resized.image-style-align-right {
   float: right;
-  margin: 0 0 0rem 0rem
+  mmargin: .25rem 1.5rem 1rem 0
 }
 h1.toc-header,
 h2.toc-header,
@@ -566,11 +566,11 @@ h4.toc-header {
 }
 .contents.ck.ck-content figure.image.image_resized.image-style-align-left {
   float: left!important;
-  margin: 0 1.5rem 1rem 0
+  margin: .25rem 1.5rem 1rem 0
 }
 .contents.ck.ck-content figure.image.image_resized.image-style-align-right {
   float: right!important;
-  margin: 0 0 1rem 1.5rem
+  margin: .25rem 1.5rem 1rem 0
 }
 .contents.ck.ck-content h1,
 .contents.ck.ck-content h2,
