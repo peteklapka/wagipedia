@@ -105,6 +105,17 @@
   color: var(--dnd-blood)!important;
   text-decoration: none!important
 }
+
+.contents h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))!important
+}
+
 .contents h3 {
   font-size: 1.3rem;
   margin-top: 1.4rem;
