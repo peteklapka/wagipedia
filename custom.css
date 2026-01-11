@@ -1,95 +1,294 @@
-@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap);
+/* ==========================================================================
+   Wagipedia Theme CSS (D&D Parchment)
+   - Consolidated + de-duplicated
+   - Organized into sections
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0) Fonts
+   -------------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap");
+/* NOTE: You reference "Fira Code" for code blocks but don’t import it here.
+   If you want it guaranteed, add:
+   @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap");
+*/
+
+/* --------------------------------------------------------------------------
+   1) Theme tokens / variables
+   -------------------------------------------------------------------------- */
 :root {
   --dnd-parchment: #f5f1e6;
   --dnd-parchment-dark: #e3d7c0;
   --dnd-ink: #222222;
   --dnd-muted: #5a5347;
+
   --dnd-red: #b11716;
   --dnd-gold: #ffae00;
   --dnd-blood: #7b1111;
+
   --dnd-brown: #654519;
   --dnd-deep: #20130c;
-  --dnd-border: #c3b59a
+  --dnd-border: #c3b59a;
+
+  /* Common gradients */
+  --dnd-grad-appbar: linear-gradient(180deg, #2b1b11 0%, var(--dnd-deep) 100%);
+  --dnd-grad-panel: linear-gradient(180deg, #f0dfc2, #e3d1ad);
+  --dnd-grad-underline: linear-gradient(90deg, var(--dnd-red), var(--dnd-gold), rgba(0, 0, 0, 0));
+  --dnd-grad-btn-red: linear-gradient(180deg, #c42523, var(--dnd-red));
+  --dnd-grad-btn-gold: linear-gradient(180deg, #ffd75a, var(--dnd-gold));
 }
+
+/* --------------------------------------------------------------------------
+   2) App shell (background + base color)
+   -------------------------------------------------------------------------- */
 .v-application {
-  background: radial-gradient(circle at top,#fdf8ec 0,#f3ebdb 40%,#eadfc9 100%)!important;
-  color: var(--dnd-ink)!important
+  background: radial-gradient(circle at top, #fdf8ec 0%, #f3ebdb 40%, #eadfc9 100%) !important;
+  color: var(--dnd-ink) !important;
 }
+
+/* Vuetify wrapper: ensure our content container behaves predictably */
 .v-main .v-main__wrap {
-  display: block!important
+  display: block !important;
 }
+
+/* --------------------------------------------------------------------------
+   3) Main content container (the “page”)
+   -------------------------------------------------------------------------- */
 .v-main .contents {
   max-width: 1200px;
-  margin: 24px auto 48px auto;
+  margin: 24px auto 48px;
   padding: 32px 40px;
+
   background: var(--dnd-parchment);
   border: 1px solid var(--dnd-border);
-  box-shadow: 0 10px 25px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.3) inset;
-  border-radius: 4px
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
 }
-.v-application .v-app-bar {
-  background: linear-gradient(180deg,#2b1b11 0,var(--dnd-deep) 100%)!important;
-  color: #f7e9c9!important;
-  border-bottom: 2px solid var(--dnd-red)
-}
-.v-application .v-app-bar .v-toolbar__title {
-  font-variant: small-caps;
-  letter-spacing: .1em;
-  color: var(--dnd-gold)!important
-}
-#app .v-navigation-drawer,
-#app .v-navigation-drawer .primary {
-  background: var(--dnd-deep)!important;
-  color: #f5e7cb!important;
-  border-right: 1px solid #3a2415!important
-}
-#app .v-navigation-drawer .v-list-item__title,
-#app .v-navigation-drawer a {
-  color: #f5e7cb!important
-}
-#app .v-navigation-drawer .v-list-item--active,
-#app .v-navigation-drawer .v-list-item--active .v-list-item__title {
-  background-color: rgba(255,174,0,.18)!important;
-  color: var(--dnd-gold)!important
-}
-#app .v-navigation-drawer .v-list-item--link.primary,
-#app .v-navigation-drawer .v-subheader {
-  background: #3a2415!important;
-  color: #f5e7cb!important;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .75rem
-}
+
+/* Scrollbar styling (WebKit only) */
 .contents::-webkit-scrollbar {
-  width: 10px
+  width: 10px;
 }
 .contents::-webkit-scrollbar-track {
-  background: var(--dnd-parchment-dark)
+  background: var(--dnd-parchment-dark);
 }
 .contents::-webkit-scrollbar-thumb {
-  background: var(--dnd-brown)
+  background: var(--dnd-brown);
 }
+
+/* --------------------------------------------------------------------------
+   4) Top app bar (global header)
+   -------------------------------------------------------------------------- */
+.v-application .v-app-bar {
+  background: var(--dnd-grad-appbar) !important;
+  color: #f7e9c9 !important;
+  border-bottom: 2px solid var(--dnd-red);
+}
+
+/* Wiki.js sometimes nests toolbars; inherit the app-bar gradient cleanly */
+.v-application .v-app-bar .v-toolbar {
+  background: inherit !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.v-application .v-app-bar .v-toolbar__title {
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--dnd-gold) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5) Navigation drawer (left sidebar)
+   -------------------------------------------------------------------------- */
+#app .v-navigation-drawer,
+#app .v-navigation-drawer .primary {
+  background: var(--dnd-deep) !important;
+  color: #f5e7cb !important;
+  border-right: 1px solid #3a2415 !important;
+}
+
+#app .v-navigation-drawer a,
+#app .v-navigation-drawer .v-list-item__title {
+  color: #f5e7cb !important;
+}
+
+#app .v-navigation-drawer .v-list-item--active,
+#app .v-navigation-drawer .v-list-item--active .v-list-item__title {
+  background-color: rgba(255, 174, 0, 0.18) !important;
+  color: var(--dnd-gold) !important;
+}
+
+#app .v-navigation-drawer .v-list-item--link.primary,
+#app .v-navigation-drawer .v-subheader {
+  background: #3a2415 !important;
+  color: #f5e7cb !important;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   6) Typography (headings, body, links)
+   -------------------------------------------------------------------------- */
+
+/* Headings: shared */
 .contents h1,
 .contents h2,
-.contents h3 {
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  letter-spacing: .05em
+.contents h3,
+.contents.ck.ck-content h1,
+.contents.ck.ck-content h2,
+.contents.ck.ck-content h3,
+.contents.ck.ck-content h4,
+.page-header-headings .headline,
+.page-header-section .headline.grey--text.text--darken-3,
+.v-main .v-toolbar .page-title,
+.v-main .v-toolbar .page-title a,
+.v-main .v-toolbar h1 {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  letter-spacing: 0.05em;
 }
+
+/* Body text */
+.contents p,
+.contents li,
+.page-header-headings .caption,
+.page-header-section .caption.grey--text.text--darken-1,
+#discussion textarea,
+#discussion .body-2,
+.v-main .contents blockquote {
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  color: var(--dnd-ink);
+  line-height: 1.6;
+}
+
+/* Sidebar text (Source Sans) */
+.v-main .page-col-sd .v-card__title,
+.v-main .page-col-sd .v-card__title .title,
+.v-main .page-col-sd .v-card__text,
+.v-main .page-col-sd .v-list,
+.v-main .page-col-sd .v-list-item__content,
+.contents td,
+.contents th {
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Paragraph spacing normalization (Wiki.js / Vuetify override) */
+.v-application .v-main .contents p {
+  padding: 0 !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.65rem !important;
+}
+
+/* Links */
+.contents a {
+  color: var(--dnd-red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(177, 23, 22, 0.2);
+}
+.contents a:hover {
+  color: var(--dnd-gold);
+  border-bottom-color: rgba(255, 174, 0, 0.7);
+}
+
+/* Don't underline heading anchor links */
+.v-main .contents h1 > a,
+.v-main .contents h2 > a,
+.v-main .contents h3 > a {
+  border-bottom: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   7) Page title / toolbar area (Wiki.js “page header section”)
+   -------------------------------------------------------------------------- */
+.page-header-section,
+.v-main .v-toolbar {
+  background: linear-gradient(180deg, var(--dnd-parchment-dark), var(--dnd-parchment)) !important;
+  border-bottom: 2px solid rgba(101, 69, 25, 0.45);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+.page-header-section .page-col-content {
+  background: transparent !important;
+}
+
+/* Breadcrumbs */
+.v-main .v-toolbar .v-breadcrumbs {
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dnd-muted) !important;
+}
+.v-main .v-toolbar .v-breadcrumbs__divider,
+.v-main .v-toolbar .v-breadcrumbs__item,
+.v-main .v-toolbar .v-breadcrumbs__item a {
+  color: var(--dnd-muted) !important;
+}
+.v-main .v-toolbar .v-breadcrumbs__item a:hover {
+  color: var(--dnd-red) !important;
+}
+
+/* Toolbar title */
+.v-main .v-toolbar .page-title,
+.v-main .v-toolbar .page-title a,
+.v-main .v-toolbar h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--dnd-red) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-decoration: none !important;
+}
+
+.v-main .v-toolbar .page-title::after,
+.v-main .v-toolbar h1::after,
+.page-header-headings .headline::after {
+  content: "";
+  display: block;
+  margin-top: 0.15rem;
+  width: 80px;
+  height: 3px;
+  background: var(--dnd-grad-underline);
+}
+
+/* Header headline/caption sizing */
+.page-header-headings .headline,
+.page-header-section .headline.grey--text.text--darken-3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--dnd-red) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.page-header-headings .caption,
+.page-header-section .caption.grey--text.text--darken-1 {
+  font-size: 0.95rem;
+  color: var(--dnd-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8) Headings inside article content (.contents)
+   -------------------------------------------------------------------------- */
+
+/* h1 */
 .contents h1,
 .contents h1 a {
-  color: var(--dnd-red)!important;
-  text-decoration: none!important
+  color: var(--dnd-red) !important;
+  text-decoration: none !important;
 }
 .contents h1 {
   font-size: 2.1rem;
-  margin-top: 0;
-  margin-bottom: .4rem;
+  margin: 0 0 0.4rem;
   text-transform: uppercase;
+
   position: relative;
-  padding-bottom: .3rem
   display: inline-block;
   max-width: 100%;
-  clear: both; 
+  clear: both;
+  padding-bottom: 0.3rem;
 }
 .contents h1::after {
   content: "";
@@ -98,567 +297,24 @@
   bottom: 0;
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))!important
+  background: var(--dnd-grad-underline) !important;
 }
+
+/* h2 */
 .contents h2,
 .contents h2 a {
-  color: var(--dnd-blood)!important;
-  text-decoration: none!important
-}
-
-.v-main .contents h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 120px;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--dnd-red),
-    var(--dnd-gold),
-    rgba(0,0,0,0)
-  ) !important;
-}
-
-.contents h3 {
-  font-size: 1.3rem;
-  margin-top: 1.4rem;
-  margin-bottom: .2rem;
-  color: var(--dnd-red)
-}
-.contents li,
-.contents p {
-  font-family: Lora,Georgia,"Times New Roman",serif;
-  color: var(--dnd-ink);
-  line-height: 1.6
-}
-.v-application .v-main .contents p {
-  padding-top: 0!important;
-  padding-right: 0!important;
-  padding-bottom: 0!important;
-  padding-left: 0!important;
-  margin-top: .25rem!important;
-  margin-bottom: .65rem!important
-}
-.contents a {
-  color: var(--dnd-red);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(177,23,22,.2)
-}
-.contents a:hover {
-  color: var(--dnd-gold);
-  border-bottom-color: rgba(255,174,0,.7)
-}
-.dnd-quote {
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  border-left: 4px solid var(--dnd-red);
-  padding-left: .75rem;
-  margin: 1rem 0;
-  color: var(--dnd-muted)
-}
-.v-main .page-col-sd .v-card__title,
-.v-main .page-col-sd .v-card__title .title {
-  font-family: "Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
-}
-.contents table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: .5rem 0;
-  background: rgba(255,255,255,.4)
-}
-.contents td,
-.contents th {
-  border: 1px solid rgba(0,0,0,.15);
-  padding: .4rem .6rem
-}
-.contents th {
-  background: linear-gradient(180deg,#f0dfc2,#e3d1ad);
-  color: var(--dnd-ink);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  font-size: .85rem;
-  border-bottom: 2px solid var(--dnd-red)
-}
-.contents td,
-.v-main .page-col-sd .v-card__text,
-.v-main .page-col-sd .v-list,
-.v-main .page-col-sd .v-list-item__content {
-  font-family: "Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size: .9rem
-}
-.contents code,
-.contents pre {
-  font-family: "Fira Code",Consolas,SFMono-Regular,monospace
-}
-.contents pre {
-  background: #2b241c;
-  color: #f6ecd8;
-  border-radius: 4px;
-  padding: .75rem 1rem;
-  border: 1px solid #4a3b2b
-}
-.v-btn--is-elevated.primary,
-.v-btn.primary,
-.v-btn.primary:not(.v-btn--text):not(.v-btn--outlined) {
-  background: linear-gradient(180deg,#c42523,var(--dnd-red))!important;
-  color: #fef9e8!important;
-  border-radius: 999px
-}
-.v-btn.secondary,
-.v-btn.secondary:not(.v-btn--text):not(.v-btn--outlined) {
-  background: linear-gradient(180deg,#ffd75a,var(--dnd-gold))!important;
-  color: #3b2510!important
-}
-.v-card {
-  background: rgba(245,241,230,.95)!important;
-  border-radius: 4px!important;
-  border: 1px solid var(--dnd-border)!important
-}
-.v-footer {
-  background: #1b120c!important;
-  color: #cbb89a!important;
-  border-top: 1px solid #3a2415!important
-}
-.v-main .page-col-sd .v-card {
-  background: var(--dnd-parchment)!important;
-  border: 1px solid var(--dnd-border)!important;
-  box-shadow: 0 4px 10px rgba(0,0,0,.18)!important
-}
-.v-main .page-col-sd .v-card__text,
-.v-main .page-col-sd .v-list,
-.v-main .page-col-sd .v-list-item,
-.v-main .page-col-sd .v-list-item__content,
-.v-main .page-col-sd .v-sheet {
-  background: var(--dnd-parchment)!important
-}
-.v-main .page-col-sd .v-card__title,
-.v-main .page-col-sd .v-card__title .title {
-  background: linear-gradient(180deg,#f0dfc2,#e3d1ad)!important;
-  color: var(--dnd-brown)!important;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .75rem
-}
-.toc-header::after {
-  background-image: none!important;
-  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))!important
-}
-.page-header-section,
-.v-main .v-toolbar {
-  background: linear-gradient(180deg,var(--dnd-parchment-dark),var(--dnd-parchment))!important;
-  border-bottom: 2px solid rgba(101,69,25,.45);
-  box-shadow: 0 3px 8px rgba(0,0,0,.18)
-}
-.v-application .v-app-bar .v-toolbar {
-  background: inherit!important;
-  border-bottom: none!important;
-  box-shadow: none!important
-}
-.v-main .v-toolbar .v-breadcrumbs {
-  font-family: "Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size: .8rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--dnd-muted)!important
-}
-.v-main .v-toolbar .v-breadcrumbs__divider,
-.v-main .v-toolbar .v-breadcrumbs__item,
-.v-main .v-toolbar .v-breadcrumbs__item a {
-  color: var(--dnd-muted)!important
-}
-.v-main .v-toolbar .v-breadcrumbs__item a:hover {
-  color: var(--dnd-red)!important
-}
-.v-main .v-toolbar .page-title,
-.v-main .v-toolbar .page-title a,
-.v-main .v-toolbar h1 {
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--dnd-red)!important;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin: 0;
-  text-decoration: none!important
-}
-.v-main .v-toolbar .page-title::after,
-.v-main .v-toolbar h1::after {
-  content: "";
-  display: block;
-  margin-top: .15rem;
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))
-}
-.page-header-section .page-col-content {
-  background: 0 0!important
-}
-.page-header-headings .headline,
-.page-header-section .headline.grey--text.text--darken-3 {
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--dnd-red)!important;
-  text-transform: uppercase;
-  letter-spacing: .08em
-}
-.page-header-headings .caption,
-.page-header-section .caption.grey--text.text--darken-1 {
-  font-family: Lora,Georgia,"Times New Roman",serif;
-  font-size: .95rem;
-  color: var(--dnd-muted)!important
-}
-.page-header-headings .headline::after {
-  content: "";
-  display: block;
-  margin-top: .15rem;
-  width: 90px;
-  height: 3px;
-  background: linear-gradient(90deg,var(--dnd-red),var(--dnd-gold),rgba(0,0,0,0))
-}
-.contents p.dropcap::first-letter {
-  float: left;
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  color: var(--dnd-red);
-  font-size: 2.6rem;
-  line-height: .9;
-  padding-right: .3rem;
-  padding-top: .05rem
-}
-@media (max-width:800px) {
-  .contents p.dropcap::first-letter {
-    float: none;
-    font-size: inherit;
-    line-height: inherit;
-    padding: 0
-  }
-}
-.v-main .contents figure.table > table tr td,
-.v-main .contents table tr:nth-child(2n) td:nth-child(2n) {
-  background-color: transparent!important
-}
-.v-main .contents figure.table > table tbody tr:nth-child(odd) > td,
-.v-main .contents figure.table > table tbody tr:nth-child(odd) > th {
-  background-color: #f7fbf1!important
-}
-.v-main .contents figure.table > table tbody tr:nth-child(2n) > td,
-.v-main .contents figure.table > table tbody tr:nth-child(2n) > th {
-  background-color: #e3f0d4!important
-}
-.v-main .contents figure.table > table tbody tr:hover > td,
-.v-main .contents figure.table > table tbody tr:hover > th {
-  background-color: #d6e9c4!important
-}
-.v-main .contents figure.table {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: 100%
-}
-.v-main .contents figure.table > table {
-  width: 100%;
-  max-width: none
-}
-.page-toc-card {
-  padding: 0!important
-}
-.page-toc-card > .overline {
-  padding: 6px 10px 2px 10px!important
-}
-.page-toc-card > .v-list {
-  padding: 4px 8px 6px 8px!important
-}
-.page-toc-card .v-list-item {
-  min-height: 24px!important;
-  padding-top: 0!important;
-  padding-bottom: 0!important
-}
-.page-toc-card .v-list-item .v-icon {
-  margin-left: 0!important;
-  margin-right: 4px!important
-}
-.page-toc-card .v-list-item__title {
-  padding-left: 4px!important;
-  padding-right: 0!important;
-  margin-top: 2px!important;
-  margin-bottom: 2px!important
-}
-#discussion.comments-container {
-  max-width: 1200px;
-  margin: 24px auto 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
-  border: 1px solid var(--dnd-border);
-  overflow: hidden
-}
-#discussion .comments-header {
-  display: flex;
-  align-items: center;
-  padding: 8px 14px;
-  background: linear-gradient(180deg,#f0dfc2,#e3d1ad);
-  border-bottom: 2px solid rgba(101,69,25,.45);
-  font-family: "Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--dnd-brown);
-  font-size: .85rem
-}
-#discussion .comments-header .v-icon {
-  color: var(--dnd-red)!important;
-  font-size: 18px
-}
-#discussion .comments-main {
-  background: var(--dnd-parchment);
-  padding: 12px 16px 14px 16px
-}
-#discussion .v-input__slot.white {
-  background: rgba(245,241,230,.95)!important;
-  border-radius: 4px;
-  border: 1px solid var(--dnd-border)
-}
-#discussion textarea {
-  font-family: Lora,Georgia,"Times New Roman",serif;
-  color: var(--dnd-ink)
-}
-#discussion .d-flex.align-center {
-  margin-top: 8px
-}
-#discussion .blue-grey--text {
-  color: var(--dnd-muted)!important
-}
-#discussion .v-btn {
-  background: linear-gradient(180deg,#c42523,var(--dnd-red))!important;
-  color: #fef9e8!important;
-  border-radius: 999px!important;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  font-family: "Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
-}
-#discussion .v-btn .v-icon {
-  color: #fef9e8!important
-}
-#discussion .v-divider {
-  border-color: rgba(101,69,25,.35)!important
-}
-#discussion .body-2 {
-  color: var(--dnd-muted)!important;
-  font-family: Lora,Georgia,"Times New Roman",serif
-}
-.v-main .contents blockquote {
-  margin: 1.4rem 0;
-  padding: .9rem 1.3rem 1.1rem 1.4rem;
-  background: #f7fbf1;
-  border: 1px solid #b6c99b;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
-  position: relative;
-  font-family: Lora,Georgia,"Times New Roman",serif;
-  color: var(--dnd-ink)
-}
-.v-main .contents blockquote::before {
-  content: "“";
-  position: absolute;
-  top: .95rem;
-  left: 1.2rem;
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  font-size: 1.8rem;
-  line-height: 1;
-  color: #7b8f52;
-  opacity: .7
-}
-.v-main .contents blockquote p {
-  margin: .2rem 0;
-  padding-left: .8rem
-}
-.v-main .contents blockquote p:first-child strong {
-  display: block;
-  font-family: "Cormorant Garamond",Georgia,"Times New Roman",serif;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--dnd-brown);
-  margin-bottom: .25rem;
-  border-bottom: 2px solid rgba(101,69,25,.3);
-  padding-bottom: .15rem
-}
-.v-main .contents h1 > a,
-.v-main .contents h2 > a,
-.v-main .contents h3 > a {
-  border-bottom: none!important
+  color: var(--dnd-blood) !important;
+  text-decoration: none !important;
 }
 .v-main .contents h2 {
   font-size: 1.6rem;
-  margin-top: .6rem;
-  margin-bottom: .15rem;
-  padding-bottom: .3rem;
-  position: relative;
-  border-bottom: none !important; 
-}
-.v-main .contents h2 > a {
-  position: relative;
-  padding-right: 1.4rem
-}
-.v-main .contents h2 > a::after {
-  content: " ⎘";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: .9em;
-  color: var(--dnd-muted);
-  opacity: .7;
-  transition: transform .18s ease-out,color .18s ease-out,opacity .18s ease-out
-}
-.v-main .contents h2 > a:hover::after {
-  color: var(--dnd-gold);
-  opacity: 1;
-  transform: translateY(-50%) translateX(3px)
-}
-.v-main .contents h2 > a:hover {
-  color: var(--dnd-gold)!important
-}
-.v-application .v-main .contents h2 + p {
-  border-spacing: 0px!important
-}
-.v-main .contents figure.table > table thead th {
-  background: #a5cca0!important;
-  color: var(--dnd-ink)!important;
-  border-bottom: 0 solid rgba(101,69,25,.45)!important
-}
-.v-main .contents .image-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: left;
-  margin: 1rem 0
-}
-.v-main .contents .image-row figure.image {
-  margin: 0;
-  flex: 0 1 30%
-}
-.v-main .contents .image-row figure.image img {
-  display: block;
-  width: 100%;
-  height: auto
-}
-.v-main .contents a.zoomycard {
-  display: inline-block;
-  cursor: pointer;
-  transition: transform .12s ease-out,box-shadow .12s ease-out
-}
-.v-main .contents a.zoomycard:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,.2)
-}
-.v-main .contents figure.table > table {
-  border-collapse: separate!important;
-  border-spacing: 0 3px!important;
-  background: 0 0!important
-}
-.v-main .contents figure.table > table td,
-.v-main .contents figure.table > table th {
-  border: none!important
-}
-figure.image.image_resized.image-style-align-left {
-  float: left;
-  margin: .5rem 1.5rem 0rem 0rem
-}
-figure.image.image_resized.image-style-align-right {
-  float: right;
-  margin: .5rem 0rem 0rem 1.5rem
-}
-h1.toc-header,
-h2.toc-header,
-h3.toc-header,
-h4.toc-header {
-  clear: both
-}
-@media (max-width:768px) {
-  .contents.ck.ck-content figure.image.image_resized.image-style-align-left,
-  .contents.ck.ck-content figure.image.image_resized.image-style-align-right,
-  figure.image.image_resized.image-style-align-left,
-  figure.image.image_resized.image-style-align-right {
-    float: none!important;
-    margin: 1rem auto
-  }
-}
-.contents.ck.ck-content figure.image.image_resized.image-style-align-left {
-  float: left!important;
-  margin: .5rem 1.5rem 0rem 0rem
-}
-.contents.ck.ck-content figure.image.image_resized.image-style-align-right {
-  float: right!important;
-  margin: .5rem 0rem 0rem 1.5rem
-}
-.contents.ck.ck-content h1,
-.contents.ck.ck-content h2,
-.contents.ck.ck-content h3,
-.contents.ck.ck-content h4 {
-  clear: both
-}
-h1.toc-header,
-h2.toc-header,
-h3.toc-header,
-h4.toc-header {
-  clear: none
-}
-.contents.ck.ck-content h1,
-.contents.ck.ck-content h2,
-.contents.ck.ck-content h3,
-.contents.ck.ck-content h4 {
-  clear: none
-}
-.contents.ck.ck-content figure.image.image_resized.image-style-align-left + h1.toc-header::after,
-.contents.ck.ck-content figure.image.image_resized.image-style-align-left + h1::after,
-.contents.ck.ck-content figure.image.image_resized.image-style-align-right + h1.toc-header::after,
-.contents.ck.ck-content figure.image.image_resized.image-style-align-right + h1::after,
-figure.image.image_resized.image-style-align-left + h1.toc-header::after,
-figure.image.image_resized.image-style-align-left + h1::after,
-figure.image.image_resized.image-style-align-right + h1.toc-header::after,
-figure.image.image_resized.image-style-align-right + h1::after {
-  display: none
-}
-.contents h1 {
-  display: inline-block;
-  max-width: 100%
-  clear: both; 
-}
-
-/* Let h2/h3 behave like normal block headings */
-.contents h2,
-.contents h3 {
-  display: block;
-  max-width: 100%;
-}
-
-.contents.ck.ck-content h1 {
-  display: inline-block;
-  max-width: 100%;
-  clear: both; 
-}
-
-.contents.ck.ck-content h2,
-.contents.ck.ck-content h3,
-.contents.ck.ck-content h4 {
-  display: block;
-  max-width: 100%;
-}
-
-h1.toc-header,
-h2.toc-header,
-h3.toc-header,
-h4.toc-header {
-  clear: none
-}
-
-.contents.ck.ck-content h2 {
+  margin-top: 0.6rem;
+  margin-bottom: 0.15rem;
+  padding-bottom: 0.3rem;
   position: relative;
   border-bottom: none !important;
 }
-
+.v-main .contents h2::after,
 .contents.ck.ck-content h2::after {
   content: "";
   position: absolute;
@@ -666,10 +322,163 @@ h4.toc-header {
   bottom: 0;
   width: 120px;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--dnd-red),
-    var(--dnd-gold),
-    rgba(0,0,0,0)
-  ) !important;
+  background: var(--dnd-grad-underline) !important;
 }
+
+/* Add "copy link" hint icon on h2 anchor */
+.v-main .contents h2 > a {
+  position: relative;
+  padding-right: 1.4rem;
+}
+.v-main .contents h2 > a::after {
+  content: " ⎘";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9em;
+  color: var(--dnd-muted);
+  opacity: 0.7;
+  transition: transform 0.18s ease-out, color 0.18s ease-out, opacity 0.18s ease-out;
+}
+.v-main .contents h2 > a:hover {
+  color: var(--dnd-gold) !important;
+}
+.v-main .contents h2 > a:hover::after {
+  color: var(--dnd-gold);
+  opacity: 1;
+  transform: translateY(-50%) translateX(3px);
+}
+
+/* h3 */
+.contents h3 {
+  font-size: 1.3rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.2rem;
+  color: var(--dnd-red);
+}
+
+/* Let h2/h3/h4 behave like normal block headings */
+.contents h2,
+.contents h3,
+.contents.ck.ck-content h2,
+.contents.ck.ck-content h3,
+.contents.ck.ck-content h4 {
+  display: block;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   9) Drop caps
+   -------------------------------------------------------------------------- */
+.contents p.dropcap::first-letter {
+  float: left;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  color: var(--dnd-red);
+  font-size: 2.6rem;
+  line-height: 0.9;
+  padding-right: 0.3rem;
+  padding-top: 0.05rem;
+}
+
+@media (max-width: 800px) {
+  .contents p.dropcap::first-letter {
+    float: none;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10) Quotes / blockquotes
+   -------------------------------------------------------------------------- */
+
+/* Inline “D&D quote” callout */
+.dnd-quote {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.05rem;
+
+  border-left: 4px solid var(--dnd-red);
+  padding-left: 0.75rem;
+  margin: 1rem 0;
+
+  color: var(--dnd-muted);
+}
+
+/* Blockquote styling */
+.v-main .contents blockquote {
+  margin: 1.4rem 0;
+  padding: 0.9rem 1.3rem 1.1rem 1.4rem;
+  background: #f7fbf1;
+  border: 1px solid #b6c99b;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+.v-main .contents blockquote::before {
+  content: "“";
+  position: absolute;
+  top: 0.95rem;
+  left: 1.2rem;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #7b8f52;
+  opacity: 0.7;
+}
+.v-main .contents blockquote p {
+  margin: 0.2rem 0;
+  padding-left: 0.8rem;
+}
+.v-main .contents blockquote p:first-child strong {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dnd-brown);
+  margin-bottom: 0.25rem;
+  border-bottom: 2px solid rgba(101, 69, 25, 0.3);
+  padding-bottom: 0.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   11) Tables
+   -------------------------------------------------------------------------- */
+
+/* Generic tables in content */
+.contents table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.4);
+}
+.contents th,
+.contents td {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0.4rem 0.6rem;
+}
+.contents th {
+  background: var(--dnd-grad-panel);
+  color: var(--dnd-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  border-bottom: 2px solid var(--dnd-red);
+}
+.contents td {
+  font-size: 0.9rem;
+}
+
+/* Wiki.js “figure.table” gets a different “row-card” look */
+.v-main .contents figure.table {
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+  max-height: 100%;
+}
+.v-main .contents figure.table > table {
+  width: 100%;
+  max-width: none;
+  border-collapse: separate !important;
