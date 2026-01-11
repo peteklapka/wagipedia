@@ -598,3 +598,21 @@
 }
 
 
+.v-main .page-col-sd .page-author-card .btn-animate-edit,
+.v-main .page-col-sd .page-author-card .btn-animate-edit .v-icon {
+  color: var(--dnd-brown) !important;
+}
+
+/* Specifically override Vuetify utility color class on the icon */
+.v-main .page-col-sd .page-author-card .v-icon.indigo--text {
+  color: var(--dnd-brown) !important;
+}
+
+/* Optional: tasteful hover */
+.v-main .page-col-sd .page-author-card .btn-animate-edit:hover {
+  background: rgba(255, 174, 0, 0.10) !important;
+}
+.v-main .page-col-sd .page-author-card .btn-animate-edit:hover .v-icon {
+  color: var(--dnd-red) !important;
+}
+
