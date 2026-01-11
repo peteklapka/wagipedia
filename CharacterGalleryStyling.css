@@ -108,3 +108,28 @@ dialog.wag-dialog::backdrop {
   align-items: center;
   justify-content: center
 }
+#wagCharGallery .wag-char-card {
+  transition: transform 140ms ease-out,box-shadow 140ms ease-out,filter 140ms ease-out;
+  transform-origin: center;
+  will-change: transform
+}
+#wagCharGallery .wag-char-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 26px rgba(0,0,0,.28);
+  filter: saturate(1.02)
+}
+#wagCharGallery .wag-char-card:focus-within {
+  transform: scale(1.02);
+  box-shadow: 0 12px 26px rgba(0,0,0,.26);
+  outline: 3px solid rgba(255,174,0,.45);
+  outline-offset: 3px
+}
+@media (prefers-reduced-motion:reduce) {
+  #wagCharGallery .wag-char-card {
+    transition: none!important
+  }
+  #wagCharGallery .wag-char-card:focus-within,
+  #wagCharGallery .wag-char-card:hover {
+    transform: none!important
+  }
+}
