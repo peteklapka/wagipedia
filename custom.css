@@ -469,8 +469,10 @@
 .v-main .contents figure.table {
   display: block;
   max-width: 100%;
-  overflow: auto;
-  max-height: 100%;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+  height: auto !important;
 }
 .v-main .contents figure.table > table {
   width: 100%;
