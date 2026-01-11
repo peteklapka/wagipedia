@@ -420,7 +420,11 @@ function parseCharacterMetaFromContent(html, fallbackTitle) {
 
 function renderCard(p, meta, locale) {
   const portrait = meta.portrait
-    ? `<img src="${escapeHtml(meta.portrait)}" alt="${escapeHtml(meta.name)}" style="width:100%;height:220px;object-fit:cover;display:block;">`
+    ? `<div style="height:220px;background:rgba(0,0,0,0.04);display:flex;align-items:center;justify-content:center;">
+       <img src="${escapeHtml(meta.portrait)}"
+            alt="${escapeHtml(meta.name)}"
+            style="max-width:100%;max-height:220px;object-fit:contain;display:block;">
+       </div>`
     : `<div style="height:220px;display:flex;align-items:center;justify-content:center;color:var(--dnd-muted);font-family:var(--font-ui);background:rgba(0,0,0,0.04);">
          No portrait
        </div>`;
