@@ -485,11 +485,19 @@
   border-collapse: separate !important;
 
 /* ==========================================================================
-Discussion / Comments (Wiki.js)
-========================================================================== */
+   Comments + Discussion (Wiki.js)
+   Targets both possible roots:
+   - #comments (inline Comments module like your screenshot)
+   - #discussion (Talk/Discussion module)
+   - .comments-container (common class used by both)
+   ========================================================================== */
 
-/* Outer container */
-#discussion.comments-container {
+/* --- Root container (card shell) ---------------------------------------- */
+#comments.comments-container,
+#discussion.comments-container,
+#comments,
+#discussion,
+.comments-container {
   max-width: 1200px;
   margin: 24px auto 0;
   border-radius: 4px;
@@ -499,8 +507,14 @@ Discussion / Comments (Wiki.js)
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
-/* Header bar */
-#discussion .comments-header {
+/* --- Header bar ---------------------------------------------------------- */
+/* Some builds use .comments-header, others are Vuetify card titles */
+#comments .comments-header,
+#discussion .comments-header,
+.comments-container .comments-header,
+#comments .v-card__title,
+#discussion .v-card__title,
+.comments-container .v-card__title {
   display: flex;
   align-items: center;
   padding: 8px 14px;
@@ -515,43 +529,83 @@ Discussion / Comments (Wiki.js)
   color: var(--dnd-brown);
 }
 
-/* Header icon */
-#discussion .comments-header .v-icon {
+/* Header icon (speech bubble, etc.) */
+#comments .comments-header .v-icon,
+#discussion .comments-header .v-icon,
+.comments-container .comments-header .v-icon,
+#comments .v-card__title .v-icon,
+#discussion .v-card__title .v-icon,
+.comments-container .v-card__title .v-icon {
   color: var(--dnd-red) !important;
   font-size: 18px;
 }
 
-/* Main content area */
-#discussion .comments-main {
+/* Optional: add a little flourish underline in the header */
+#comments .comments-header::after,
+#discussion .comments-header::after,
+.comments-container .comments-header::after,
+#comments .v-card__title::after,
+#discussion .v-card__title::after,
+.comments-container .v-card__title::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 120px;
+  margin-left: 10px;
+  background: var(--dnd-grad-underline);
+  opacity: 0.85;
+}
+
+/* --- Main body area ------------------------------------------------------ */
+/* Some builds use .comments-main, others are Vuetify card text */
+#comments .comments-main,
+#discussion .comments-main,
+.comments-container .comments-main,
+#comments .v-card__text,
+#discussion .v-card__text,
+.comments-container .v-card__text {
   background: var(--dnd-parchment);
   padding: 12px 16px 14px;
 }
 
-/* Comment input “slot” container */
-#discussion .v-input__slot.white {
+/* --- Input styling ------------------------------------------------------- */
+#comments .v-input__slot.white,
+#discussion .v-input__slot.white,
+.comments-container .v-input__slot.white {
   background: rgba(245, 241, 230, 0.95) !important;
   border-radius: 4px;
   border: 1px solid var(--dnd-border);
 }
 
-/* Textarea */
-#discussion textarea {
+/* Textarea / input text */
+#comments textarea,
+#discussion textarea,
+.comments-container textarea,
+#comments input,
+#discussion input,
+.comments-container input {
   font-family: Lora, Georgia, "Times New Roman", serif;
   color: var(--dnd-ink);
 }
 
 /* Row that contains submit button / controls */
-#discussion .d-flex.align-center {
+#comments .d-flex.align-center,
+#discussion .d-flex.align-center,
+.comments-container .d-flex.align-center {
   margin-top: 8px;
 }
 
-/* Muted text */
-#discussion .blue-grey--text {
+/* Muted helper text */
+#comments .blue-grey--text,
+#discussion .blue-grey--text,
+.comments-container .blue-grey--text {
   color: var(--dnd-muted) !important;
 }
 
-/* Submit / action buttons */
-#discussion .v-btn {
+/* --- Buttons ------------------------------------------------------------- */
+#comments .v-btn,
+#discussion .v-btn,
+.comments-container .v-btn {
   background: var(--dnd-grad-btn-primary) !important;
   color: #fef9e8 !important;
   border-radius: 999px !important;
@@ -561,19 +615,23 @@ Discussion / Comments (Wiki.js)
   letter-spacing: 0.05em;
 }
 
-/* Button icon */
-#discussion .v-btn .v-icon {
+#comments .v-btn .v-icon,
+#discussion .v-btn .v-icon,
+.comments-container .v-btn .v-icon {
   color: #fef9e8 !important;
 }
 
-/* Dividers between comments */
-#discussion .v-divider {
+/* --- Dividers between comments ------------------------------------------ */
+#comments .v-divider,
+#discussion .v-divider,
+.comments-container .v-divider {
   border-color: rgba(101, 69, 25, 0.35) !important;
 }
 
-/* Comment body text */
-#discussion .body-2 {
+/* --- Comment body text --------------------------------------------------- */
+#comments .body-2,
+#discussion .body-2,
+.comments-container .body-2 {
   color: var(--dnd-muted) !important;
   font-family: Lora, Georgia, "Times New Roman", serif;
 }
-
