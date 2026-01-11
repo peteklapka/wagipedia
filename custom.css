@@ -256,7 +256,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   8) Headings inside article content
+   8) Headings & Images inside article content
    -------------------------------------------------------------------------- */
 
 /* h1 */
@@ -338,6 +338,40 @@
   display: block;
   max-width: 100%;
 }
+
+
+/* Give ALL content images a little breathing room from surrounding text */
+.v-main .contents img,
+.v-main .contents figure.image {
+  margin: 0.6rem 0;
+}
+
+/* CKEditor / Wiki.js float styles (left/right aligned images) */
+.v-main .contents figure.image.image-style-align-left,
+.v-main .contents img.image-style-align-left,
+.v-main .contents figure.image.image-style-side {
+  margin: 0.35rem 1.1rem 0.9rem 0 !important; /* top | right | bottom | left */
+}
+
+.v-main .contents figure.image.image-style-align-right,
+.v-main .contents img.image-style-align-right {
+  margin: 0.35rem 0 0.9rem 1.1rem !important;
+}
+
+/* Make centered images look intentional */
+.v-main .contents figure.image.image-style-align-center {
+  margin: 1rem auto !important;
+}
+
+/* Critical: stop separators / headings from cutting through floats */
+.v-main .contents hr,
+.v-main .contents h1,
+.v-main .contents h2,
+.v-main .contents h3,
+.v-main .contents h4 {
+  clear: both;
+}
+
 
 /* --------------------------------------------------------------------------
    9) Drop caps
