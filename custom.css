@@ -474,6 +474,25 @@
   color: var(--dnd-brown) !important;
 }
 
+/* Make sidebar header strips breathe and vertically center text/icons */
+.v-main .page-col-sd .v-card .overline {
+  display: flex !important;
+  align-items: center !important;
+
+  /* This is the main fix for "crammed upper-left" */
+  padding: 10px 14px !important;
+
+  /* Vuetify overline can feel cramped */
+  line-height: 1.2 !important;
+  min-height: 34px;
+  box-sizing: border-box;
+}
+
+/* In case pb-2 is fighting us, explicitly normalize bottom padding */
+.v-main .page-col-sd .v-card .overline.pb-2 {
+  padding-bottom: 10px !important;
+}
+
 /* --------------------------------------------------------------------------
    13) Discussion / Comments
    -------------------------------------------------------------------------- */
