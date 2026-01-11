@@ -732,3 +732,36 @@
   outline-offset: 3px;
 }
 
+/* --------------------------------------------------------------------------
+   17) Editor-only / View-only helpers
+   -------------------------------------------------------------------------- */
+
+/* Default: hide editor-only helpers in normal view */
+.v-main .contents .wag-edit-only {
+  display: none !important;
+}
+
+/* In the CKEditor (WYSIWYG) context: show them */
+.v-main .contents.ck.ck-content .wag-edit-only {
+  display: block !important; /* or inline / inline-block as desired */
+}
+
+/* Optional inverse: show only in view mode */
+.v-main .contents .wag-view-only {
+  display: block !important;
+}
+.v-main .contents.ck.ck-content .wag-view-only {
+  display: none !important;
+}
+
+/* Optional: make helper text look like “instructional whisper,” not content */
+.v-main .contents.ck.ck-content .wag-edit-only {
+  margin: 0.35rem 0 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed rgba(101, 69, 25, 0.35);
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-card);
+  color: var(--dnd-muted);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
