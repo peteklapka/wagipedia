@@ -664,3 +664,37 @@
   margin-top: 4px !important;
 }
 
+/* --------------------------------------------------------------------------
+   15) Floating Edit Button (FAB) — match Wagipedia theme
+   -------------------------------------------------------------------------- */
+
+/* The main FAB button */
+.v-application .btn-animate-edit.v-btn.v-btn--fab {
+  background: var(--dnd-grad-btn-primary) !important;
+  color: #fef9e8 !important;
+  border: 1px solid rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Override Vuetify 'primary' class on this specific button */
+.v-application .btn-animate-edit.v-btn.v-btn--fab.primary {
+  background: var(--dnd-grad-btn-primary) !important;
+}
+
+/* Icon color */
+.v-application .btn-animate-edit.v-btn.v-btn--fab .v-icon {
+  color: #fef9e8 !important;
+}
+
+/* Hover/focus: slight gold warmth */
+.v-application .btn-animate-edit.v-btn.v-btn--fab:hover {
+  filter: brightness(1.05) saturate(1.05);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* Keyboard focus ring that matches the theme */
+.v-application .btn-animate-edit.v-btn.v-btn--fab:focus-visible {
+  outline: 3px solid rgba(255, 174, 0, 0.55);
+  outline-offset: 3px;
+}
+
