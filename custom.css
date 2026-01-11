@@ -343,7 +343,7 @@
 /* Give ALL content images a little breathing room from surrounding text */
 .v-main .contents img,
 .v-main .contents figure.image {
-  margin: 0.6rem 0;
+  margin: 0.0rem 0;
 }
 
 /* CKEditor / Wiki.js float styles (left/right aligned images) */
