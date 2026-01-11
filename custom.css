@@ -38,17 +38,6 @@
   --dnd-grad-btn-gold: linear-gradient(180deg, #ffd75a, var(--dnd-gold));
 }
 
-/* --------------------------------------------------------------------------
-   Reusable theme gradients
-   -------------------------------------------------------------------------- */
-:root {
-  --dnd-grad-underline: linear-gradient(90deg, var(--dnd-red), var(--dnd-gold), rgba(0,0,0,0));
-  --dnd-grad-panel: linear-gradient(180deg, #f0dfc2, #e3d1ad);
-  --dnd-grad-btn-primary: linear-gradient(180deg, #c42523, var(--dnd-red));
-  --dnd-grad-btn-secondary: linear-gradient(180deg, #ffd75a, var(--dnd-gold));
-}
-
-
 
 /* --------------------------------------------------------------------------
    2) App shell (background + base color)
@@ -494,6 +483,7 @@
   width: 100%;
   max-width: none;
   border-collapse: separate !important;
+}
 
 /* ==========================================================================
    Discussion / Comments (Wiki.js)
