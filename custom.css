@@ -881,3 +881,132 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+   19 Character Sheet: Stat Block (rendered from WYSIWYG tables)
+   -------------------------------------------------------------------------- */
+
+.wag-sheet {
+  border: 1px solid var(--dnd-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: rgba(245, 241, 230, 0.70);
+  box-shadow: var(--shadow-card-soft);
+  margin: 0.75rem 0 1.25rem;
+}
+
+.wag-sheet__hdr {
+  background: var(--dnd-grad-panel);
+  border-bottom: 2px solid rgba(101, 69, 25, 0.45);
+  padding: 10px 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wag-sheet__title {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dnd-brown);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.wag-sheet__body {
+  padding: 12px 14px 14px;
+}
+
+.wag-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.wag-sheet-stat {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.40);
+  padding: 8px 10px;
+}
+
+.wag-sheet-stat__k {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dnd-muted);
+  margin-bottom: 2px;
+}
+
+.wag-sheet-stat__v {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--dnd-ink);
+}
+
+.wag-abilities {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.wag-ability {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.40);
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.wag-ability__abbr {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dnd-muted);
+}
+
+.wag-ability__score {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--dnd-ink);
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.wag-ability__mod {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--dnd-brown);
+  margin-top: 2px;
+}
+
+.wag-dl {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 8px 12px;
+}
+
+.wag-dl__k {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dnd-muted);
+  padding-top: 2px;
+}
+
+.wag-dl__v {
+  font-family: var(--font-body);
+  color: var(--dnd-ink);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .wag-sheet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wag-abilities { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wag-dl { grid-template-columns: 1fr; }
+}
+
