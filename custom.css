@@ -306,7 +306,6 @@
   bottom: 0;
   width: 120px;
   height: 2px;
-  background: var(--dnd-grad-underline) !important;
 }
 
 /* "Copy link" hint icon on h2 anchor */
