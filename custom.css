@@ -698,3 +698,37 @@
   outline-offset: 3px;
 }
 
+/* --------------------------------------------------------------------------
+   16) Floating "Return to top" Button — match Wagipedia theme
+   -------------------------------------------------------------------------- */
+
+/* Target specifically the scroll-to-top FAB */
+.v-application button.v-btn.v-btn--fab[aria-label="Return to top"] {
+  background: var(--dnd-grad-btn-secondary) !important;
+  color: var(--dnd-deep) !important;
+  border: 1px solid rgba(0, 0, 0, 0.22) !important;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Override Vuetify's primary color on this specific button */
+.v-application button.v-btn.v-btn--fab.primary[aria-label="Return to top"] {
+  background: var(--dnd-grad-btn-secondary) !important;
+}
+
+/* Icon color (dark ink on gold) */
+.v-application button.v-btn.v-btn--fab[aria-label="Return to top"] .v-icon {
+  color: var(--dnd-deep) !important;
+  opacity: 0.95;
+}
+
+/* Hover/focus polish */
+.v-application button.v-btn.v-btn--fab[aria-label="Return to top"]:hover {
+  filter: brightness(1.03) saturate(1.06);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.30) !important;
+}
+
+.v-application button.v-btn.v-btn--fab[aria-label="Return to top"]:focus-visible {
+  outline: 3px solid rgba(177, 23, 22, 0.45);
+  outline-offset: 3px;
+}
+
