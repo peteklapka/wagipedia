@@ -485,94 +485,83 @@
   border-collapse: separate !important;
 
 /* ==========================================================================
-   Comments (Wiki.js) — exact selectors for your inspected DOM
-   Root: <div id="discussion" class="comments-container"> ... </div>
+   Comments / Discussion (Wiki.js) — "make it obey" edition
+   DOM root: <div id="discussion" class="comments-container">...</div>
+   This widget uses Vuetify theme classes (theme--dark, blue-grey, darken-2)
+   so we target those directly and use high specificity.
    ========================================================================== */
 
-/* Container shell */
-#discussion.comments-container {
+/* Root container */
+html body #app .v-application .v-main #discussion.comments-container {
   max-width: 1200px;
   margin: 24px auto 0;
   border-radius: 4px;
   overflow: hidden;
 
-  border: 1px solid var(--dnd-border);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--dnd-border) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Header bar (it’s currently "theme--dark" so we overpower it explicitly) */
-#discussion.comments-container > .comments-header {
+/* Header bar (Vuetify marks it theme--dark; override anyway) */
+html body #app .v-application .v-main #discussion.comments-container > .comments-header,
+html body #app .v-application .v-main #discussion.comments-container > .comments-header.theme--dark {
   display: flex;
   align-items: center;
-  gap: 8px;
   padding: 8px 14px;
 
   background: var(--dnd-grad-panel) !important;
   color: var(--dnd-brown) !important;
-  border-bottom: 2px solid rgba(101, 69, 25, 0.45);
+  border-bottom: 2px solid rgba(101, 69, 25, 0.45) !important;
 
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
 }
 
 /* Header icon */
-#discussion.comments-container > .comments-header .v-icon {
+html body #app .v-application .v-main #discussion.comments-container > .comments-header .v-icon {
   color: var(--dnd-red) !important;
   font-size: 18px !important;
 }
 
-/* Optional flourish line to the right of "Comments" */
-#discussion.comments-container > .comments-header span {
-  position: relative;
-}
-#discussion.comments-container > .comments-header span::after {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  height: 2px;
-  width: 140px;
-  background: var(--dnd-grad-underline);
-  opacity: 0.85;
-}
-
-/* Main body */
-#discussion.comments-container > .comments-main {
+/* Main panel */
+html body #app .v-application .v-main #discussion.comments-container > .comments-main {
   background: var(--dnd-parchment) !important;
-  padding: 12px 16px 14px;
+  padding: 12px 16px 14px !important;
 }
 
-/* Textarea wrapper */
-#discussion .v-input.v-textarea .v-input__slot.white {
+/* Input shell */
+html body #app .v-application .v-main #discussion .v-input__slot.white {
   background: rgba(245, 241, 230, 0.95) !important;
-  border: 1px solid var(--dnd-border) !important;
   border-radius: 4px !important;
+  border: 1px solid var(--dnd-border) !important;
   box-shadow: none !important;
 }
 
-/* Textarea itself */
-#discussion textarea#discussion-new {
+/* Textarea */
+html body #app .v-application .v-main #discussion textarea {
   font-family: Lora, Georgia, "Times New Roman", serif !important;
   color: var(--dnd-ink) !important;
 }
 
-/* Markdown format row + metadata line */
-#discussion .d-flex.align-center.pt-3 .caption,
-#discussion .d-flex.align-center.pt-3 .blue-grey--text {
+/* Little grey helper texts */
+html body #app .v-application .v-main #discussion .blue-grey--text,
+html body #app .v-application .v-main #discussion .caption {
   color: var(--dnd-muted) !important;
 }
 
 /* Divider */
-#discussion hr.v-divider {
+html body #app .v-application .v-main #discussion .v-divider {
   border-color: rgba(101, 69, 25, 0.35) !important;
 }
 
 /* --------------------------------------------------------------------------
-   Action button (currently theme--dark blue-grey darken-2)
+   The button: class="v-btn ... theme--dark blue-grey darken-2"
+   Target that exact combo so it can’t squirm away.
    -------------------------------------------------------------------------- */
-#discussion button.v-btn.v-btn--depressed {
+html body #app .v-application .v-main #discussion button.v-btn.theme--dark.blue-grey.darken-2,
+html body #app .v-application .v-main #discussion button.v-btn.v-btn--depressed.theme--dark.blue-grey.darken-2 {
   background: var(--dnd-grad-btn-primary) !important;
   color: #fef9e8 !important;
   border-radius: 999px !important;
@@ -583,73 +572,49 @@
 }
 
 /* Button icon */
-#discussion button.v-btn.v-btn--depressed .v-icon {
+html body #app .v-application .v-main #discussion button.v-btn.theme--dark.blue-grey.darken-2 .v-icon {
   color: #fef9e8 !important;
 }
 
-/* Button label */
-#discussion button.v-btn.v-btn--depressed .text-none {
-  text-transform: uppercase !important; /* "text-none" is ironic, we fix it */
-  letter-spacing: 0.05em;
-}
-
-/* Hover state */
-#discussion button.v-btn.v-btn--depressed:hover {
-  filter: brightness(1.05);
-}
-
-/* --------------------------------------------------------------------------
-   Timeline posts (cards)
-   -------------------------------------------------------------------------- */
-
-/* The timeline line itself (subtle) */
-#discussion .v-timeline.v-timeline--dense::before {
-  background: rgba(101, 69, 25, 0.25) !important;
-}
-
-/* Each post card */
-#discussion .v-timeline-item.comments-post .v-card.theme--light {
+/* Timeline post cards */
+html body #app .v-application .v-main #discussion .v-timeline-item.comments-post .v-card.theme--light {
   background: rgba(245, 241, 230, 0.96) !important;
   border: 1px solid var(--dnd-border) !important;
   border-radius: 4px !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Post name + date */
-#discussion .comments-post-name.caption strong {
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: 0.02em;
-  color: var(--dnd-brown);
+/* Post meta */
+html body #app .v-application .v-main #discussion .comments-post-name strong {
+  color: var(--dnd-brown) !important;
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
-#discussion .comments-post-date.overline {
+html body #app .v-application .v-main #discussion .comments-post-date {
   color: var(--dnd-muted) !important;
 }
 
-/* Post content text */
-#discussion .comments-post-content p {
-  font-family: Lora, Georgia, "Times New Roman", serif;
-  color: var(--dnd-ink);
-  line-height: 1.6;
+/* Post content */
+html body #app .v-application .v-main #discussion .comments-post-content p {
+  font-family: Lora, Georgia, "Times New Roman", serif !important;
+  color: var(--dnd-ink) !important;
+  line-height: 1.6 !important;
 }
 
-/* Edit/Delete icons */
-#discussion .comments-post-actions .v-icon.v-icon--link {
+/* Edit/delete icons */
+html body #app .v-application .v-main #discussion .comments-post-actions .v-icon.v-icon--link {
   color: var(--dnd-muted) !important;
   opacity: 0.75;
-  transition: opacity 0.15s ease-out, color 0.15s ease-out;
 }
-#discussion .comments-post-actions .v-icon.v-icon--link:hover {
-  opacity: 1;
+html body #app .v-application .v-main #discussion .comments-post-actions .v-icon.v-icon--link:hover {
   color: var(--dnd-red) !important;
+  opacity: 1;
 }
 
-/* Avatar dot styling (keep your current vibe but make it match theme) */
-#discussion .v-timeline-item__inner-dot {
-  background: var(--dnd-red) !important; /* overrides pink darken-4 */
+/* Avatar dot ring (your DOM had pink darken-4; make it on-theme) */
+html body #app .v-application .v-main #discussion .v-timeline-item__inner-dot {
+  background: var(--dnd-red) !important;
 }
-#discussion .v-avatar.blue-grey {
+html body #app .v-application .v-main #discussion .v-avatar.blue-grey {
   background: var(--dnd-deep) !important;
 }
-#discussion .v-avatar .white--text.title {
-  color: #fef9e8 !important;
-}
+
