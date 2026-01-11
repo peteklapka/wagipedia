@@ -1,0 +1,110 @@
+#characters-poc {
+  margin: 1rem 0
+}
+#btnListChars {
+  padding: .6rem .9rem;
+  border-radius: .6rem;
+  border: 1px solid rgba(0,0,0,.2);
+  cursor: pointer
+}
+#btnListChars:disabled {
+  opacity: .6;
+  cursor: wait
+}
+dialog.wag-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  width: min(760px,92vw);
+  border: 1px solid var(--dnd-border);
+  border-radius: var(--radius-card);
+  padding: 0;
+  background: var(--dnd-parchment);
+  color: var(--dnd-ink);
+  box-shadow: var(--shadow-card)
+}
+dialog.wag-dialog::backdrop {
+  background: rgba(32,19,12,.55)
+}
+.wag-dialog__hdr {
+  background: var(--dnd-grad-panel);
+  border-bottom: 2px solid rgba(101,69,25,.45);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px
+}
+.wag-dialog__title {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  color: var(--dnd-brown)
+}
+.wag-dialog__body {
+  padding: 14px;
+  font-family: var(--font-ui)
+}
+.wag-dialog__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px
+}
+.wag-dialog__label {
+  display: block;
+  font-size: .85rem;
+  color: var(--dnd-muted);
+  margin-bottom: .25rem;
+  letter-spacing: .02em
+}
+.wag-dialog__input {
+  width: 100%;
+  padding: .55rem .6rem;
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 10px;
+  background: rgba(255,255,255,.55);
+  font-family: var(--font-body);
+  color: var(--dnd-ink)
+}
+.wag-dialog__actions {
+  padding: 0 14px 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px
+}
+.wag-btn {
+  border-radius: 999px;
+  padding: .45rem .85rem;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .78rem;
+  cursor: pointer;
+  border: 1px solid rgba(101,69,25,.55);
+  background: rgba(245,241,230,.55);
+  color: var(--dnd-brown)
+}
+.wag-btn:hover {
+  border-color: var(--dnd-gold);
+  background: rgba(255,174,0,.1)
+}
+.wag-btn--primary {
+  border-color: rgba(177,23,22,.55);
+  background: var(--dnd-grad-btn-primary);
+  color: #fef9e8
+}
+.wag-btn--primary:hover {
+  filter: brightness(1.03)
+}
+.wag-btn--icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center
+}
