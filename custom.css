@@ -298,15 +298,6 @@
   position: relative;
   border-bottom: none !important;
 }
-.v-main .contents h2::after,
-.contents.ck.ck-content h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 120px;
-  height: 2px;
-}
 
 /* "Copy link" hint icon on h2 anchor */
 .v-main .contents h2 > a {
