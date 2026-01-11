@@ -563,3 +563,116 @@
   color: var(--dnd-muted) !important;
   font-family: Lora, Georgia, "Times New Roman", serif;
 }
+
+/* ==========================================================================
+   Sidebar (right column) — Page TOC / Talk / Author / Shortcuts
+   DOM root: .page-col-sd
+   ========================================================================== */
+
+/* 1) Make all sidebar cards parchment, not white */
+.v-main .page-col-sd .v-card.v-sheet.theme--light {
+  background: var(--dnd-parchment) !important;
+  border: 1px solid var(--dnd-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,.18) !important;
+}
+
+/* 2) Card “header rows” are .overline blocks (NOT v-card__title) */
+.v-main .page-col-sd .v-card .overline {
+  background: var(--dnd-grad-panel) !important;
+  color: var(--dnd-brown) !important;
+
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .75rem;
+
+  border-bottom: 2px solid rgba(101,69,25,.45) !important;
+}
+
+/* Vuetify color utility classes that force blue/indigo — neutralize them */
+.v-main .page-col-sd .overline.primary--text,
+.v-main .page-col-sd .overline.indigo--text,
+.v-main .page-col-sd .overline.blue-grey--text {
+  color: var(--dnd-brown) !important;
+}
+
+/* 3) TOC list styling */
+.v-main .page-col-sd .page-toc-card .v-list {
+  background: var(--dnd-parchment) !important;
+  padding-top: 4px !important;
+  padding-bottom: 6px !important;
+}
+
+.v-main .page-col-sd .page-toc-card .v-list-item {
+  min-height: 28px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* TOC item text */
+.v-main .page-col-sd .page-toc-card .v-list-item__title {
+  color: var(--dnd-ink) !important;
+}
+
+/* Nested TOC items (your DOM uses caption + grey text classes) */
+.v-main .page-col-sd .page-toc-card .v-list-item__title.caption {
+  color: var(--dnd-muted) !important;
+}
+
+/* Chevron icons */
+.v-main .page-col-sd .page-toc-card .v-icon.grey--text {
+  color: rgba(90,83,71,.75) !important;
+}
+
+/* Hover + active states */
+.v-main .page-col-sd .page-toc-card .v-list-item:hover {
+  background: rgba(255,174,0,.10) !important;
+}
+.v-main .page-col-sd .page-toc-card .v-list-item--active,
+.v-main .page-col-sd .page-toc-card .v-list-item--active .v-list-item__title {
+  background: rgba(255,174,0,.16) !important;
+  color: var(--dnd-brown) !important;
+}
+
+/* 4) Talk card buttons (outlined) — make them on-theme */
+.v-main .page-col-sd .page-comments-card .v-btn.v-btn--outlined {
+  border-color: rgba(101,69,25,.55) !important;
+  color: var(--dnd-brown) !important;
+  background: rgba(245,241,230,.55) !important;
+}
+
+.v-main .page-col-sd .page-comments-card .v-btn.v-btn--outlined:hover {
+  background: rgba(255,174,0,.10) !important;
+  border-color: var(--dnd-gold) !important;
+}
+
+/* Button inner text spans are explicitly blue-grey--text */
+.v-main .page-col-sd .page-comments-card .v-btn .blue-grey--text {
+  color: var(--dnd-brown) !important;
+}
+.v-main .page-col-sd .page-comments-card .v-btn .v-icon.blue-grey--text {
+  color: var(--dnd-red) !important;
+}
+
+/* 5) Author card details (name/date) */
+.v-main .page-col-sd .page-author-card-name {
+  color: var(--dnd-ink) !important;
+}
+.v-main .page-col-sd .page-author-card-date {
+  color: var(--dnd-muted) !important;
+}
+
+/* 6) Shortcuts bar (share/print strip) */
+.v-main .page-col-sd .page-shortcuts-card header.v-toolbar.grey.lighten-3 {
+  background: var(--dnd-grad-panel) !important;
+  border: 1px solid var(--dnd-border) !important;
+  border-radius: 4px !important;
+}
+
+.v-main .page-col-sd .page-shortcuts-card .v-icon.grey--text {
+  color: rgba(90,83,71,.75) !important;
+}
+.v-main .page-col-sd .page-shortcuts-card .v-btn:hover .v-icon.grey--text {
+  color: var(--dnd-red) !important;
+}
+
