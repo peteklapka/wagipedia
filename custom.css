@@ -485,19 +485,12 @@
   border-collapse: separate !important;
 
 /* ==========================================================================
-   Comments + Discussion (Wiki.js)
-   Targets both possible roots:
-   - #comments (inline Comments module like your screenshot)
-   - #discussion (Talk/Discussion module)
-   - .comments-container (common class used by both)
+   Comments (Wiki.js) — exact selectors for your inspected DOM
+   Root: <div id="discussion" class="comments-container"> ... </div>
    ========================================================================== */
 
-/* --- Root container (card shell) ---------------------------------------- */
-#comments.comments-container,
-#discussion.comments-container,
-#comments,
-#discussion,
-.comments-container {
+/* Container shell */
+#discussion.comments-container {
   max-width: 1200px;
   margin: 24px auto 0;
   border-radius: 4px;
@@ -507,131 +500,156 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
-/* --- Header bar ---------------------------------------------------------- */
-/* Some builds use .comments-header, others are Vuetify card titles */
-#comments .comments-header,
-#discussion .comments-header,
-.comments-container .comments-header,
-#comments .v-card__title,
-#discussion .v-card__title,
-.comments-container .v-card__title {
+/* Header bar (it’s currently "theme--dark" so we overpower it explicitly) */
+#discussion.comments-container > .comments-header {
   display: flex;
   align-items: center;
+  gap: 8px;
   padding: 8px 14px;
 
-  background: var(--dnd-grad-panel);
+  background: var(--dnd-grad-panel) !important;
+  color: var(--dnd-brown) !important;
   border-bottom: 2px solid rgba(101, 69, 25, 0.45);
 
   font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.85rem;
-  color: var(--dnd-brown);
 }
 
-/* Header icon (speech bubble, etc.) */
-#comments .comments-header .v-icon,
-#discussion .comments-header .v-icon,
-.comments-container .comments-header .v-icon,
-#comments .v-card__title .v-icon,
-#discussion .v-card__title .v-icon,
-.comments-container .v-card__title .v-icon {
+/* Header icon */
+#discussion.comments-container > .comments-header .v-icon {
   color: var(--dnd-red) !important;
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
-/* Optional: add a little flourish underline in the header */
-#comments .comments-header::after,
-#discussion .comments-header::after,
-.comments-container .comments-header::after,
-#comments .v-card__title::after,
-#discussion .v-card__title::after,
-.comments-container .v-card__title::after {
+/* Optional flourish line to the right of "Comments" */
+#discussion.comments-container > .comments-header span {
+  position: relative;
+}
+#discussion.comments-container > .comments-header span::after {
   content: "";
-  display: block;
-  height: 2px;
-  width: 120px;
+  display: inline-block;
+  vertical-align: middle;
   margin-left: 10px;
+  height: 2px;
+  width: 140px;
   background: var(--dnd-grad-underline);
   opacity: 0.85;
 }
 
-/* --- Main body area ------------------------------------------------------ */
-/* Some builds use .comments-main, others are Vuetify card text */
-#comments .comments-main,
-#discussion .comments-main,
-.comments-container .comments-main,
-#comments .v-card__text,
-#discussion .v-card__text,
-.comments-container .v-card__text {
-  background: var(--dnd-parchment);
+/* Main body */
+#discussion.comments-container > .comments-main {
+  background: var(--dnd-parchment) !important;
   padding: 12px 16px 14px;
 }
 
-/* --- Input styling ------------------------------------------------------- */
-#comments .v-input__slot.white,
-#discussion .v-input__slot.white,
-.comments-container .v-input__slot.white {
+/* Textarea wrapper */
+#discussion .v-input.v-textarea .v-input__slot.white {
   background: rgba(245, 241, 230, 0.95) !important;
-  border-radius: 4px;
-  border: 1px solid var(--dnd-border);
+  border: 1px solid var(--dnd-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
 }
 
-/* Textarea / input text */
-#comments textarea,
-#discussion textarea,
-.comments-container textarea,
-#comments input,
-#discussion input,
-.comments-container input {
-  font-family: Lora, Georgia, "Times New Roman", serif;
-  color: var(--dnd-ink);
+/* Textarea itself */
+#discussion textarea#discussion-new {
+  font-family: Lora, Georgia, "Times New Roman", serif !important;
+  color: var(--dnd-ink) !important;
 }
 
-/* Row that contains submit button / controls */
-#comments .d-flex.align-center,
-#discussion .d-flex.align-center,
-.comments-container .d-flex.align-center {
-  margin-top: 8px;
-}
-
-/* Muted helper text */
-#comments .blue-grey--text,
-#discussion .blue-grey--text,
-.comments-container .blue-grey--text {
+/* Markdown format row + metadata line */
+#discussion .d-flex.align-center.pt-3 .caption,
+#discussion .d-flex.align-center.pt-3 .blue-grey--text {
   color: var(--dnd-muted) !important;
 }
 
-/* --- Buttons ------------------------------------------------------------- */
-#comments .v-btn,
-#discussion .v-btn,
-.comments-container .v-btn {
+/* Divider */
+#discussion hr.v-divider {
+  border-color: rgba(101, 69, 25, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Action button (currently theme--dark blue-grey darken-2)
+   -------------------------------------------------------------------------- */
+#discussion button.v-btn.v-btn--depressed {
   background: var(--dnd-grad-btn-primary) !important;
   color: #fef9e8 !important;
   border-radius: 999px !important;
 
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
 }
 
-#comments .v-btn .v-icon,
-#discussion .v-btn .v-icon,
-.comments-container .v-btn .v-icon {
+/* Button icon */
+#discussion button.v-btn.v-btn--depressed .v-icon {
   color: #fef9e8 !important;
 }
 
-/* --- Dividers between comments ------------------------------------------ */
-#comments .v-divider,
-#discussion .v-divider,
-.comments-container .v-divider {
-  border-color: rgba(101, 69, 25, 0.35) !important;
+/* Button label */
+#discussion button.v-btn.v-btn--depressed .text-none {
+  text-transform: uppercase !important; /* "text-none" is ironic, we fix it */
+  letter-spacing: 0.05em;
 }
 
-/* --- Comment body text --------------------------------------------------- */
-#comments .body-2,
-#discussion .body-2,
-.comments-container .body-2 {
+/* Hover state */
+#discussion button.v-btn.v-btn--depressed:hover {
+  filter: brightness(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   Timeline posts (cards)
+   -------------------------------------------------------------------------- */
+
+/* The timeline line itself (subtle) */
+#discussion .v-timeline.v-timeline--dense::before {
+  background: rgba(101, 69, 25, 0.25) !important;
+}
+
+/* Each post card */
+#discussion .v-timeline-item.comments-post .v-card.theme--light {
+  background: rgba(245, 241, 230, 0.96) !important;
+  border: 1px solid var(--dnd-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Post name + date */
+#discussion .comments-post-name.caption strong {
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.02em;
+  color: var(--dnd-brown);
+}
+#discussion .comments-post-date.overline {
   color: var(--dnd-muted) !important;
+}
+
+/* Post content text */
+#discussion .comments-post-content p {
   font-family: Lora, Georgia, "Times New Roman", serif;
+  color: var(--dnd-ink);
+  line-height: 1.6;
+}
+
+/* Edit/Delete icons */
+#discussion .comments-post-actions .v-icon.v-icon--link {
+  color: var(--dnd-muted) !important;
+  opacity: 0.75;
+  transition: opacity 0.15s ease-out, color 0.15s ease-out;
+}
+#discussion .comments-post-actions .v-icon.v-icon--link:hover {
+  opacity: 1;
+  color: var(--dnd-red) !important;
+}
+
+/* Avatar dot styling (keep your current vibe but make it match theme) */
+#discussion .v-timeline-item__inner-dot {
+  background: var(--dnd-red) !important; /* overrides pink darken-4 */
+}
+#discussion .v-avatar.blue-grey {
+  background: var(--dnd-deep) !important;
+}
+#discussion .v-avatar .white--text.title {
+  color: #fef9e8 !important;
 }
