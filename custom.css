@@ -597,7 +597,6 @@
   color: var(--dnd-red) !important;
 }
 
-
 .v-main .page-col-sd .page-author-card .btn-animate-edit,
 .v-main .page-col-sd .page-author-card .btn-animate-edit .v-icon {
   color: var(--dnd-brown) !important;
@@ -614,5 +613,20 @@
 }
 .v-main .page-col-sd .page-author-card .btn-animate-edit:hover .v-icon {
   color: var(--dnd-red) !important;
+}
+
+/* Talk card: push the buttons row down a bit from the "TALK" strip */
+.v-main .page-col-sd .page-comments-card .overline + .d-flex {
+  margin-top: 8px !important;
+}
+
+/* Author card: push the name/date down a bit from the "LAST EDITED BY" strip */
+.v-main .page-col-sd .page-author-card .overline + .page-author-card-name {
+  margin-top: 8px !important;
+}
+
+/* Tiny extra separation between name and date for readability */
+.v-main .page-col-sd .page-author-card .page-author-card-date {
+  margin-top: 4px !important;
 }
 
