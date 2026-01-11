@@ -8,39 +8,47 @@
    0) Fonts
    -------------------------------------------------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap");
-/* NOTE: You reference "Fira Code" for code blocks but don’t import it here.
-   If you want it guaranteed, add:
-   @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap");
+/* Optional (only if you want it guaranteed):
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap");
 */
 
 /* --------------------------------------------------------------------------
    1) Theme tokens / variables
    -------------------------------------------------------------------------- */
 :root {
+  /* Colors */
   --dnd-parchment: #f5f1e6;
   --dnd-parchment-dark: #e3d7c0;
   --dnd-ink: #222222;
   --dnd-muted: #5a5347;
-
   --dnd-red: #b11716;
   --dnd-gold: #ffae00;
   --dnd-blood: #7b1111;
-
   --dnd-brown: #654519;
   --dnd-deep: #20130c;
   --dnd-border: #c3b59a;
 
-  /* Common gradients */
+  /* Fonts (single source of truth) */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: Lora, Georgia, "Times New Roman", serif;
+  --font-ui: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Fira Code", Consolas, SFMono-Regular, monospace;
+
+  /* Gradients */
   --dnd-grad-appbar: linear-gradient(180deg, #2b1b11 0%, var(--dnd-deep) 100%);
   --dnd-grad-panel: linear-gradient(180deg, #f0dfc2, #e3d1ad);
   --dnd-grad-underline: linear-gradient(90deg, var(--dnd-red), var(--dnd-gold), rgba(0, 0, 0, 0));
-  --dnd-grad-btn-red: linear-gradient(180deg, #c42523, var(--dnd-red));
-  --dnd-grad-btn-gold: linear-gradient(180deg, #ffd75a, var(--dnd-gold));
+  --dnd-grad-btn-primary: linear-gradient(180deg, #c42523, var(--dnd-red));
+  --dnd-grad-btn-secondary: linear-gradient(180deg, #ffd75a, var(--dnd-gold));
+
+  /* Reusable “chrome” */
+  --radius-card: 4px;
+  --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.25);
+  --shadow-card-soft: 0 4px 10px rgba(0, 0, 0, 0.18);
 }
 
-
 /* --------------------------------------------------------------------------
-   2) App shell (background + base color)
+   2) App shell
    -------------------------------------------------------------------------- */
 .v-application {
   background: radial-gradient(circle at top, #fdf8ec 0%, #f3ebdb 40%, #eadfc9 100%) !important;
@@ -53,46 +61,36 @@
 }
 
 /* --------------------------------------------------------------------------
-   3) Main content container (the “page”)
+   3) Main content container
    -------------------------------------------------------------------------- */
 .v-main .contents {
   max-width: 1200px;
   margin: 24px auto 48px;
   padding: 32px 40px;
-
   background: var(--dnd-parchment);
   border: 1px solid var(--dnd-border);
-  border-radius: 4px;
+  border-radius: var(--radius-card);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
 }
 
 /* Scrollbar styling (WebKit only) */
-.contents::-webkit-scrollbar {
-  width: 10px;
-}
-.contents::-webkit-scrollbar-track {
-  background: var(--dnd-parchment-dark);
-}
-.contents::-webkit-scrollbar-thumb {
-  background: var(--dnd-brown);
-}
+.contents::-webkit-scrollbar { width: 10px; }
+.contents::-webkit-scrollbar-track { background: var(--dnd-parchment-dark); }
+.contents::-webkit-scrollbar-thumb { background: var(--dnd-brown); }
 
 /* --------------------------------------------------------------------------
-   4) Top app bar (global header)
+   4) Top app bar
    -------------------------------------------------------------------------- */
 .v-application .v-app-bar {
   background: var(--dnd-grad-appbar) !important;
   color: #f7e9c9 !important;
   border-bottom: 2px solid var(--dnd-red);
 }
-
-/* Wiki.js sometimes nests toolbars; inherit the app-bar gradient cleanly */
 .v-application .v-app-bar .v-toolbar {
   background: inherit !important;
   border-bottom: none !important;
   box-shadow: none !important;
 }
-
 .v-application .v-app-bar .v-toolbar__title {
   font-variant: small-caps;
   letter-spacing: 0.1em;
@@ -108,33 +106,29 @@
   color: #f5e7cb !important;
   border-right: 1px solid #3a2415 !important;
 }
-
 #app .v-navigation-drawer a,
 #app .v-navigation-drawer .v-list-item__title {
   color: #f5e7cb !important;
 }
-
 #app .v-navigation-drawer .v-list-item--active,
 #app .v-navigation-drawer .v-list-item--active .v-list-item__title {
   background-color: rgba(255, 174, 0, 0.18) !important;
   color: var(--dnd-gold) !important;
 }
-
 #app .v-navigation-drawer .v-list-item--link.primary,
 #app .v-navigation-drawer .v-subheader {
   background: #3a2415 !important;
   color: #f5e7cb !important;
-
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.75rem;
 }
 
 /* --------------------------------------------------------------------------
-   6) Typography (headings, body, links)
+   6) Typography (global)
    -------------------------------------------------------------------------- */
 
-/* Headings: shared */
+/* Display / heading typography */
 .contents h1,
 .contents h2,
 .contents h3,
@@ -147,11 +141,11 @@
 .v-main .v-toolbar .page-title,
 .v-main .v-toolbar .page-title a,
 .v-main .v-toolbar h1 {
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   letter-spacing: 0.05em;
 }
 
-/* Body text */
+/* Body typography */
 .contents p,
 .contents li,
 .page-header-headings .caption,
@@ -159,27 +153,23 @@
 #discussion textarea,
 #discussion .body-2,
 .v-main .contents blockquote {
-  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-family: var(--font-body);
   color: var(--dnd-ink);
   line-height: 1.6;
 }
 
-/* Sidebar text (Source Sans) */
-.v-main .page-col-sd .v-card__title,
-.v-main .page-col-sd .v-card__title .title,
-.v-main .page-col-sd .v-card__text,
-.v-main .page-col-sd .v-list,
-.v-main .page-col-sd .v-list-item__content,
-.contents td,
-.contents th {
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+/* UI typography */
+.v-main .page-col-sd,
+.v-main .v-toolbar .v-breadcrumbs,
+.contents th,
+.contents td {
+  font-family: var(--font-ui);
 }
 
 /* Paragraph spacing normalization (Wiki.js / Vuetify override) */
 .v-application .v-main .contents p {
   padding: 0 !important;
-  margin-top: 0.25rem !important;
-  margin-bottom: 0.65rem !important;
+  margin: 0.25rem 0 0.65rem !important;
 }
 
 /* Links */
@@ -192,8 +182,6 @@
   color: var(--dnd-gold);
   border-bottom-color: rgba(255, 174, 0, 0.7);
 }
-
-/* Don't underline heading anchor links */
 .v-main .contents h1 > a,
 .v-main .contents h2 > a,
 .v-main .contents h3 > a {
@@ -201,7 +189,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   7) Page title / toolbar area (Wiki.js “page header section”)
+   7) Page title / toolbar area
    -------------------------------------------------------------------------- */
 .page-header-section,
 .v-main .v-toolbar {
@@ -209,14 +197,12 @@
   border-bottom: 2px solid rgba(101, 69, 25, 0.45);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }
-
 .page-header-section .page-col-content {
   background: transparent !important;
 }
 
 /* Breadcrumbs */
 .v-main .v-toolbar .v-breadcrumbs {
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -231,7 +217,7 @@
   color: var(--dnd-red) !important;
 }
 
-/* Toolbar title */
+/* Toolbar title + underline */
 .v-main .v-toolbar .page-title,
 .v-main .v-toolbar .page-title a,
 .v-main .v-toolbar h1 {
@@ -243,7 +229,6 @@
   margin: 0;
   text-decoration: none !important;
 }
-
 .v-main .v-toolbar .page-title::after,
 .v-main .v-toolbar h1::after,
 .page-header-headings .headline::after {
@@ -271,7 +256,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   8) Headings inside article content (.contents)
+   8) Headings inside article content
    -------------------------------------------------------------------------- */
 
 /* h1 */
@@ -284,7 +269,6 @@
   font-size: 2.1rem;
   margin: 0 0 0.4rem;
   text-transform: uppercase;
-
   position: relative;
   display: inline-block;
   max-width: 100%;
@@ -309,8 +293,7 @@
 }
 .v-main .contents h2 {
   font-size: 1.6rem;
-  margin-top: 0.6rem;
-  margin-bottom: 0.15rem;
+  margin: 0.6rem 0 0.15rem;
   padding-bottom: 0.3rem;
   position: relative;
   border-bottom: none !important;
@@ -326,7 +309,7 @@
   background: var(--dnd-grad-underline) !important;
 }
 
-/* Add "copy link" hint icon on h2 anchor */
+/* "Copy link" hint icon on h2 anchor */
 .v-main .contents h2 > a {
   position: relative;
   padding-right: 1.4rem;
@@ -342,9 +325,7 @@
   opacity: 0.7;
   transition: transform 0.18s ease-out, color 0.18s ease-out, opacity 0.18s ease-out;
 }
-.v-main .contents h2 > a:hover {
-  color: var(--dnd-gold) !important;
-}
+.v-main .contents h2 > a:hover { color: var(--dnd-gold) !important; }
 .v-main .contents h2 > a:hover::after {
   color: var(--dnd-gold);
   opacity: 1;
@@ -354,8 +335,7 @@
 /* h3 */
 .contents h3 {
   font-size: 1.3rem;
-  margin-top: 1.4rem;
-  margin-bottom: 0.2rem;
+  margin: 1.4rem 0 0.2rem;
   color: var(--dnd-red);
 }
 
@@ -374,14 +354,12 @@
    -------------------------------------------------------------------------- */
 .contents p.dropcap::first-letter {
   float: left;
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   color: var(--dnd-red);
   font-size: 2.6rem;
   line-height: 0.9;
-  padding-right: 0.3rem;
-  padding-top: 0.05rem;
+  padding: 0.05rem 0.3rem 0 0;
 }
-
 @media (max-width: 800px) {
   .contents p.dropcap::first-letter {
     float: none;
@@ -394,17 +372,13 @@
 /* --------------------------------------------------------------------------
    10) Quotes / blockquotes
    -------------------------------------------------------------------------- */
-
-/* Inline “D&D quote” callout */
 .dnd-quote {
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.05rem;
-
   border-left: 4px solid var(--dnd-red);
   padding-left: 0.75rem;
   margin: 1rem 0;
-
   color: var(--dnd-muted);
 }
 
@@ -414,7 +388,7 @@
   padding: 0.9rem 1.3rem 1.1rem 1.4rem;
   background: #f7fbf1;
   border: 1px solid #b6c99b;
-  border-radius: 4px;
+  border-radius: var(--radius-card);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   position: relative;
 }
@@ -423,7 +397,7 @@
   position: absolute;
   top: 0.95rem;
   left: 1.2rem;
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   line-height: 1;
   color: #7b8f52;
@@ -435,7 +409,7 @@
 }
 .v-main .contents blockquote p:first-child strong {
   display: block;
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--dnd-brown);
@@ -447,8 +421,6 @@
 /* --------------------------------------------------------------------------
    11) Tables
    -------------------------------------------------------------------------- */
-
-/* Generic tables in content */
 .contents table {
   border-collapse: collapse;
   width: 100%;
@@ -468,11 +440,8 @@
   font-size: 0.85rem;
   border-bottom: 2px solid var(--dnd-red);
 }
-.contents td {
-  font-size: 0.9rem;
-}
+.contents td { font-size: 0.9rem; }
 
-/* Wiki.js “figure.table” gets a different “row-card” look */
 .v-main .contents figure.table {
   display: block;
   max-width: 100%;
@@ -485,32 +454,45 @@
   border-collapse: separate !important;
 }
 
-/* ==========================================================================
-   Discussion / Comments (Wiki.js)
-   ========================================================================== */
-
-#discussion.comments-container {
-  max-width: 1200px;
-  margin: 24px auto 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
-  border: 1px solid var(--dnd-border);
+/* --------------------------------------------------------------------------
+   12) Shared card chrome (Sidebar + Discussion)
+   -------------------------------------------------------------------------- */
+#discussion.comments-container,
+.v-main .page-col-sd .v-card.v-sheet.theme--light {
+  border: 1px solid var(--dnd-border) !important;
+  border-radius: var(--radius-card) !important;
   overflow: hidden;
 }
+#discussion.comments-container { box-shadow: var(--shadow-card); }
+.v-main .page-col-sd .v-card.v-sheet.theme--light { box-shadow: var(--shadow-card-soft) !important; }
 
+/* Shared header strip look */
+#discussion .comments-header,
+.v-main .page-col-sd .v-card .overline,
+.v-main .page-col-sd .page-shortcuts-card header.v-toolbar.grey.lighten-3 {
+  background: var(--dnd-grad-panel) !important;
+  border-bottom: 2px solid rgba(101, 69, 25, 0.45) !important;
+  color: var(--dnd-brown) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Neutralize Vuetify color utilities in sidebar headers */
+.v-main .page-col-sd .overline.primary--text,
+.v-main .page-col-sd .overline.indigo--text,
+.v-main .page-col-sd .overline.blue-grey--text {
+  color: var(--dnd-brown) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13) Discussion / Comments
+   -------------------------------------------------------------------------- */
 #discussion .comments-header {
   display: flex;
   align-items: center;
   padding: 8px 14px;
-
-  background: var(--dnd-grad-panel);
-  border-bottom: 2px solid rgba(101,69,25,.45);
-
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--dnd-brown);
-  font-size: .85rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
 }
 
 #discussion .comments-header .v-icon {
@@ -520,83 +502,36 @@
 
 #discussion .comments-main {
   background: var(--dnd-parchment);
-  padding: 12px 16px 14px 16px;
+  padding: 12px 16px 14px;
 }
 
 #discussion .v-input__slot.white {
-  background: rgba(245,241,230,.95) !important;
-  border-radius: 4px;
+  background: rgba(245, 241, 230, 0.95) !important;
+  border-radius: var(--radius-card);
   border: 1px solid var(--dnd-border);
 }
 
-#discussion textarea {
-  font-family: Lora, Georgia, "Times New Roman", serif;
-  color: var(--dnd-ink);
-}
-
-#discussion .d-flex.align-center {
-  margin-top: 8px;
-}
-
-#discussion .blue-grey--text {
-  color: var(--dnd-muted) !important;
-}
+#discussion .blue-grey--text { color: var(--dnd-muted) !important; }
+#discussion .d-flex.align-center { margin-top: 8px; }
 
 #discussion .v-btn {
   background: var(--dnd-grad-btn-primary) !important;
   color: #fef9e8 !important;
   border-radius: 999px !important;
   text-transform: uppercase;
-  letter-spacing: .05em;
-  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.05em;
+  font-family: var(--font-ui);
 }
+#discussion .v-btn .v-icon { color: #fef9e8 !important; }
+#discussion .v-divider { border-color: rgba(101, 69, 25, 0.35) !important; }
 
-#discussion .v-btn .v-icon {
-  color: #fef9e8 !important;
-}
-
-#discussion .v-divider {
-  border-color: rgba(101,69,25,.35) !important;
-}
-
-#discussion .body-2 {
-  color: var(--dnd-muted) !important;
-  font-family: Lora, Georgia, "Times New Roman", serif;
-}
-
-/* ==========================================================================
-   Sidebar (right column) — Page TOC / Talk / Author / Shortcuts
-   DOM root: .page-col-sd
-   ========================================================================== */
-
-/* 1) Make all sidebar cards parchment, not white */
+/* --------------------------------------------------------------------------
+   14) Sidebar (right column) — TOC / Talk / Author / Shortcuts
+   -------------------------------------------------------------------------- */
 .v-main .page-col-sd .v-card.v-sheet.theme--light {
   background: var(--dnd-parchment) !important;
-  border: 1px solid var(--dnd-border) !important;
-  border-radius: 4px !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,.18) !important;
 }
 
-/* 2) Card “header rows” are .overline blocks (NOT v-card__title) */
-.v-main .page-col-sd .v-card .overline {
-  background: var(--dnd-grad-panel) !important;
-  color: var(--dnd-brown) !important;
-
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .75rem;
-
-  border-bottom: 2px solid rgba(101,69,25,.45) !important;
-}
-
-/* Vuetify color utility classes that force blue/indigo — neutralize them */
-.v-main .page-col-sd .overline.primary--text,
-.v-main .page-col-sd .overline.indigo--text,
-.v-main .page-col-sd .overline.blue-grey--text {
-  color: var(--dnd-brown) !important;
-}
-
-/* 3) TOC list styling */
 .v-main .page-col-sd .page-toc-card .v-list {
   background: var(--dnd-parchment) !important;
   padding-top: 4px !important;
@@ -609,70 +544,48 @@
   padding-bottom: 0 !important;
 }
 
-/* TOC item text */
 .v-main .page-col-sd .page-toc-card .v-list-item__title {
   color: var(--dnd-ink) !important;
 }
-
-/* Nested TOC items (your DOM uses caption + grey text classes) */
 .v-main .page-col-sd .page-toc-card .v-list-item__title.caption {
   color: var(--dnd-muted) !important;
 }
-
-/* Chevron icons */
 .v-main .page-col-sd .page-toc-card .v-icon.grey--text {
-  color: rgba(90,83,71,.75) !important;
+  color: rgba(90, 83, 71, 0.75) !important;
 }
 
-/* Hover + active states */
 .v-main .page-col-sd .page-toc-card .v-list-item:hover {
-  background: rgba(255,174,0,.10) !important;
+  background: rgba(255, 174, 0, 0.10) !important;
 }
 .v-main .page-col-sd .page-toc-card .v-list-item--active,
 .v-main .page-col-sd .page-toc-card .v-list-item--active .v-list-item__title {
-  background: rgba(255,174,0,.16) !important;
+  background: rgba(255, 174, 0, 0.16) !important;
   color: var(--dnd-brown) !important;
 }
 
-/* 4) Talk card buttons (outlined) — make them on-theme */
+/* Talk card buttons (outlined) */
 .v-main .page-col-sd .page-comments-card .v-btn.v-btn--outlined {
-  border-color: rgba(101,69,25,.55) !important;
+  border-color: rgba(101, 69, 25, 0.55) !important;
   color: var(--dnd-brown) !important;
-  background: rgba(245,241,230,.55) !important;
+  background: rgba(245, 241, 230, 0.55) !important;
 }
-
 .v-main .page-col-sd .page-comments-card .v-btn.v-btn--outlined:hover {
-  background: rgba(255,174,0,.10) !important;
+  background: rgba(255, 174, 0, 0.10) !important;
   border-color: var(--dnd-gold) !important;
 }
+.v-main .page-col-sd .page-comments-card .v-btn .blue-grey--text { color: var(--dnd-brown) !important; }
+.v-main .page-col-sd .page-comments-card .v-btn .v-icon.blue-grey--text { color: var(--dnd-red) !important; }
 
-/* Button inner text spans are explicitly blue-grey--text */
-.v-main .page-col-sd .page-comments-card .v-btn .blue-grey--text {
-  color: var(--dnd-brown) !important;
-}
-.v-main .page-col-sd .page-comments-card .v-btn .v-icon.blue-grey--text {
-  color: var(--dnd-red) !important;
-}
+/* Author details */
+.v-main .page-col-sd .page-author-card-name { color: var(--dnd-ink) !important; }
+.v-main .page-col-sd .page-author-card-date { color: var(--dnd-muted) !important; }
 
-/* 5) Author card details (name/date) */
-.v-main .page-col-sd .page-author-card-name {
-  color: var(--dnd-ink) !important;
-}
-.v-main .page-col-sd .page-author-card-date {
-  color: var(--dnd-muted) !important;
-}
-
-/* 6) Shortcuts bar (share/print strip) */
-.v-main .page-col-sd .page-shortcuts-card header.v-toolbar.grey.lighten-3 {
-  background: var(--dnd-grad-panel) !important;
-  border: 1px solid var(--dnd-border) !important;
-  border-radius: 4px !important;
-}
-
+/* Shortcuts icons */
 .v-main .page-col-sd .page-shortcuts-card .v-icon.grey--text {
-  color: rgba(90,83,71,.75) !important;
+  color: rgba(90, 83, 71, 0.75) !important;
 }
 .v-main .page-col-sd .page-shortcuts-card .v-btn:hover .v-icon.grey--text {
   color: var(--dnd-red) !important;
 }
+
 
